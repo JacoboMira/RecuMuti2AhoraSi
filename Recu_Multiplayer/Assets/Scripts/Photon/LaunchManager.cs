@@ -12,6 +12,11 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject connectionStatusPanel;
     [SerializeField] private GameObject lobbyPanel;
 
+
+    private void Awake()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
     private void Start()
     {
         enterGamePanel.SetActive(true);
@@ -71,6 +76,8 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     {
         Debug.Log(PhotonNetwork.NickName + " se ha conectado a " +
                   PhotonNetwork.CurrentRoom.Name);
+
+        PhotonNetwork.LoadLevel("ElVidyaDeVerdad");
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -80,6 +87,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
                   " -- Numero players:" +
                   PhotonNetwork.CurrentRoom.PlayerCount);
+
     }
 
 // Método para crear un nuevo Room con el nombre aleatorio y los parámetros definidos de base.

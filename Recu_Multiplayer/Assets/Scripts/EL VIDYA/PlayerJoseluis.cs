@@ -7,8 +7,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
+using Photon.Pun;
 
-public class PlayerJoseluis : MonoBehaviour
+public class PlayerJoseluis : MonoBehaviourPunCallbacks
 {
     Vector2 inputMov;
     float speedDecrease = 3;
@@ -34,6 +35,13 @@ public class PlayerJoseluis : MonoBehaviour
     bool inRope;
     GameObject actualRope;
 
+    private void Awake()
+    {
+        if (!photonView.IsMine)
+        {
+            Destroy(transform.GetChild(0).gameObject);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +52,7 @@ public class PlayerJoseluis : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!damaged)
+        if (!damaged && photonView.IsMine)
         {
             MoveInputs();
 
@@ -54,13 +62,11 @@ public class PlayerJoseluis : MonoBehaviour
         {
             fallVelocity = _rigidbody.velocity.y;
         }
-
-        MoveCamera();
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (photonView.IsMine)
         {
-            Revive(this);
+            MoveCamera();
         }
+
     }
 
     void LookForward()
@@ -89,6 +95,7 @@ public class PlayerJoseluis : MonoBehaviour
                 inGround = false;
                 inRope = false;
                 actualRope = null;
+                photonView.RPC("Rope", RpcTarget.All, false);
             }
 
             isChargingJump = false;
@@ -203,7 +210,7 @@ public class PlayerJoseluis : MonoBehaviour
         {
             inRope= true;
             actualRope = other.gameObject;
-            _rigidbody.useGravity = false;
+            photonView.RPC("Rope", RpcTarget.All, true);
         }
     }
 
@@ -218,7 +225,17 @@ public class PlayerJoseluis : MonoBehaviour
 
             inRope = false;
             actualRope = null;
-            _rigidbody.useGravity= true;
+            photonView.RPC("Rope", RpcTarget.All, false);
+        }
+    }
+
+    [PunRPC]
+    void Rope(bool isInRope)
+    {
+         _rigidbody.useGravity = !isInRope;
+        if (!isInRope)
+        {
+            actualRope = null;
         }
     }
 
