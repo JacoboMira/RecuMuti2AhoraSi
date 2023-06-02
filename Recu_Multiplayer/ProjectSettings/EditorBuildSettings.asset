@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Photon.unity
+    guid: 87972107623278940ae26aa1218afab6
+  - enabled: 1
+    path: Assets/Scenes/ElVidyaDeVerdad.unity
+    guid: 5d4884e6e7039074fb583cc574335431
   m_configObjects: {}
