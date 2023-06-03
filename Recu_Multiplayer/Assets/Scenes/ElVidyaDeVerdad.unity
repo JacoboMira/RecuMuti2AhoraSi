@@ -1543,6 +1543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mapa_Done
       objectReference: {fileID: 0}
+    - target: {fileID: 1965507349052899539, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 44cdac97c6e0825429ca54bff1fa384b, type: 2}
     - target: {fileID: 2075134650260686311, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1589,3 +1593,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
+--- !u!1 &1965507349430756647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2907191468100522705, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
+  m_PrefabInstance: {fileID: 1965507349430756646}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1965507349430756648
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965507349430756647}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.19784068, y: 0.21264821, z: 0.02}
+  m_Center: {x: -0.026255185, y: -0.026039898, z: 0.0090467725}
