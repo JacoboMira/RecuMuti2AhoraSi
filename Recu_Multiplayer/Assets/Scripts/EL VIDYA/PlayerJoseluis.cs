@@ -67,6 +67,10 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
             {
                 photonView.RPC("HealPlayers", RpcTarget.All);
             }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                Die();
+            }
 
             MoveInputs();
 
@@ -207,6 +211,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         if (other.CompareTag("Floor"))
         {
             inGround = true;
+            _rigidbody.velocity = Vector3.zero;
             fallVelocity = -fallVelocity;
             if (fallVelocity > fallDamageThreshold)
             {
@@ -261,7 +266,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
             player.Revive();
         }
     }
-
+    [PunRPC]
     public void Revive()
     {
         damaged = false;
@@ -275,10 +280,10 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     }
 
 
-    void Die()
+    public void Die()
     {
         _rigidbody.velocity = Vector3.zero;
         transform.position = spawner.transform.position;
-        damaged = false;
+        photonView.RPC("Revive", RpcTarget.All);
     }
 }
