@@ -336,6 +336,7 @@ MonoBehaviour:
   fallDamageThreshold: 35
   fallDeathThreshold: 70
   cameraController: {fileID: 5595947022257680351}
+  spawner: {fileID: 0}
   minJump: 20
   maxJump: 100
   chargeSpeed: 125
