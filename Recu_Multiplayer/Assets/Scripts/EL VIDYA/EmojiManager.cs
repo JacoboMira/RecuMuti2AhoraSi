@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 public class EmojiManager : MonoBehaviourPunCallbacks
 {
- 
+    bool showingEmoji;
     PlayerJoseluis player;
 
     [SerializeField] GameObject emoji1;
@@ -44,22 +44,26 @@ public class EmojiManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void ShowEmoji(int emoji)
     {
-        switch (emoji)
+        if (!showingEmoji)
         {
-            case 1:
-                emoji1.SetActive(true);
-                break;
-            case 2:
-                emoji2.SetActive(true);
-                break;
-            case 3:
-                emoji3.SetActive(true);
-                break;
-            case 4:
-                emoji4.SetActive(true);
-                break;
+            showingEmoji = true;
+            switch (emoji)
+            {
+                case 1:
+                    emoji1.SetActive(true);
+                    break;
+                case 2:
+                    emoji2.SetActive(true);
+                    break;
+                case 3:
+                    emoji3.SetActive(true);
+                    break;
+                case 4:
+                    emoji4.SetActive(true);
+                    break;
+            }
+            StartCoroutine(HideEmoji());
         }
-        StartCoroutine(HideEmoji());
     }
 
 
@@ -70,6 +74,7 @@ public class EmojiManager : MonoBehaviourPunCallbacks
         emoji2.SetActive(false);
         emoji3.SetActive(false);
         emoji4.SetActive(false);
+        showingEmoji = false;
 
     }
 }

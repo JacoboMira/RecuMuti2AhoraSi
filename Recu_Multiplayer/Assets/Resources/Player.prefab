@@ -269,6 +269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c375a94ffbddd438bdfe509f394498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emoji1: {fileID: 7085826329688621951}
+  emoji2: {fileID: 1971191779290771840}
+  emoji3: {fileID: 2731933642001722194}
+  emoji4: {fileID: 8053535518548973120}
 --- !u!1 &5595947022084823844
 GameObject:
   m_ObjectHideFlags: 0
