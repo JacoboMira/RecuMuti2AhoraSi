@@ -22,22 +22,24 @@ public class EmojiManager : MonoBehaviourPunCallbacks
         transform.position = player.transform.position;
         transform.LookAt(Camera.main.gameObject.transform);
 
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (photonView.IsMine)
         {
-            photonView.RPC("ShowEmoji", RpcTarget.All, 1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            photonView.RPC("ShowEmoji", RpcTarget.All, 2);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            photonView.RPC("ShowEmoji", RpcTarget.All, 3);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            photonView.RPC("ShowEmoji", RpcTarget.All, 4);
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                photonView.RPC("ShowEmoji", RpcTarget.All, 1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                photonView.RPC("ShowEmoji", RpcTarget.All, 2);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                photonView.RPC("ShowEmoji", RpcTarget.All, 3);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                photonView.RPC("ShowEmoji", RpcTarget.All, 4);
+            }
         }
     }
 
