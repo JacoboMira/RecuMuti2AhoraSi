@@ -42,6 +42,7 @@ MonoBehaviour:
   - Rope
   - HealPlayers
   - Revive
+  - ShowEmoji
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

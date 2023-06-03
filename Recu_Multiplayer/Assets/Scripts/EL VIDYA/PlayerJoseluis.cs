@@ -61,15 +61,15 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Die();
+        }
         if (!damaged && photonView.IsMine)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 photonView.RPC("HealPlayers", RpcTarget.All);
-            }
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                Die();
             }
 
             MoveInputs();
