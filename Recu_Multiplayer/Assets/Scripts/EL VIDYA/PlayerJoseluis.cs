@@ -254,6 +254,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
 
     void Damage()
     {
+        _rigidbody.velocity = Vector3.zero;
         damaged = true;
     }
 
