@@ -22,6 +22,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     float fallVelocity;
     bool damaged;
     [SerializeField] GameObject spawner;
+    public List<PlayerJoseluis> playersToHeal = new List<PlayerJoseluis>();
 
     [Header("------------- JUMP -------------")]
     [Space(10)]
@@ -62,6 +63,11 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     {
         if (!damaged && photonView.IsMine)
         {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                photonView.RPC("HealPlayers", RpcTarget.All);
+            }
+
             MoveInputs();
 
             ChargeJump();
@@ -216,7 +222,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         }
         else if (other.CompareTag("Rope"))
         {
-            inRope= true;
+            inRope = true;
             actualRope = other.gameObject;
             photonView.RPC("Rope", RpcTarget.All, true);
         }
@@ -240,16 +246,26 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     [PunRPC]
     void Rope(bool isInRope)
     {
-         _rigidbody.useGravity = !isInRope;
+        _rigidbody.useGravity = !isInRope;
         if (!isInRope)
         {
             actualRope = null;
         }
     }
 
-    void Revive(PlayerJoseluis target)
+    [PunRPC]
+    public void HealPlayers()
     {
-        target.damaged = false;
+        foreach (PlayerJoseluis player in playersToHeal)
+        {
+            player.Revive();
+        }
+    }
+
+    public void Revive()
+    {
+        damaged = false;
+        
     }
 
     void Damage()
