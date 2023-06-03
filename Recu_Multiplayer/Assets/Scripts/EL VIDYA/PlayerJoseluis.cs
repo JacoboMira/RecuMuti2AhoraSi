@@ -262,5 +262,6 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     {
         _rigidbody.velocity = Vector3.zero;
         transform.position = spawner.transform.position;
+        damaged = false;
     }
 }
