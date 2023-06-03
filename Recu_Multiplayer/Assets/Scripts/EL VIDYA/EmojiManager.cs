@@ -19,6 +19,10 @@ public class EmojiManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+        if(player == null)
+        {
+            Destroy(gameObject);
+        }
         transform.position = player.transform.position;
         transform.LookAt(Camera.main.gameObject.transform);
 

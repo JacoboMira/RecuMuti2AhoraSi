@@ -264,7 +264,9 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         foreach (PlayerJoseluis player in playersToHeal)
         {
             player.Revive();
-        }
+        }   
+
+        playersToHeal.Clear();
     }
     [PunRPC]
     public void Revive()

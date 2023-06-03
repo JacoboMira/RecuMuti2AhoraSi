@@ -13,6 +13,10 @@ public class HealComponent : MonoBehaviour
 
     private void Update()
     {
+        if (player == null)
+        {
+            Destroy(gameObject);
+        }
         transform.position = player.transform.position;
     }
 
