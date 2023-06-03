@@ -8,11 +8,17 @@ public class HealComponent : MonoBehaviour
     private void Awake()
     {
         player = transform.parent.GetComponent<PlayerJoseluis>();
+        transform.parent = null;
+    }
+
+    private void Update()
+    {
+        transform.position = player.transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerJoseluis>())
+        if (other.GetComponent<PlayerJoseluis>() && other.GetComponent<PlayerJoseluis>() != this)
         {
             player.playersToHeal.Add(other.GetComponent<PlayerJoseluis>());
         }
