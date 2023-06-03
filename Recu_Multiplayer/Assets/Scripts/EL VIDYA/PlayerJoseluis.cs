@@ -21,7 +21,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     Rigidbody _rigidbody;
     float fallVelocity;
     bool damaged;
-
+    [SerializeField] GameObject spawner;
 
     [Header("------------- JUMP -------------")]
     [Space(10)]
@@ -34,6 +34,14 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     bool inGround = true;
     bool inRope;
     GameObject actualRope;
+
+    #region geters
+    public void SetSpawner(Spawner spawner)
+    {
+        this.spawner = spawner.gameObject;
+    }
+    #endregion
+
 
     private void Awake()
     {
@@ -252,6 +260,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
 
     void Die()
     {
-
+        _rigidbody.velocity = Vector3.zero;
+        transform.position = spawner.transform.position;
     }
 }
