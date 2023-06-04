@@ -1383,7 +1383,7 @@ GameObject:
   - component: {fileID: 306874739}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1410,7 +1410,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306874737}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 44cdac97c6e0825429ca54bff1fa384b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -7289,7 +7289,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1967909986}
   - {fileID: 5396935136069941057}
   - {fileID: 6297833426713808924}
   - {fileID: 1456189046}
@@ -7300,6 +7299,7 @@ Transform:
   - {fileID: 159286633375269629}
   - {fileID: 496782104}
   - {fileID: 2124188004}
+  - {fileID: 1967909986}
   - {fileID: 158203305}
   - {fileID: 1553163591}
   - {fileID: 1041437043}

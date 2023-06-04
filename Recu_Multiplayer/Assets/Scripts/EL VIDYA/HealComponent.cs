@@ -17,7 +17,10 @@ public class HealComponent : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        transform.position = player.transform.position;
+        else
+        {
+            transform.position = player.transform.position;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
