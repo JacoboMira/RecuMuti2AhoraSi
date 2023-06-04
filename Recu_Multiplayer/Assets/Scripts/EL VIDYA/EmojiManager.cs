@@ -67,25 +67,25 @@ public class EmojiManager : MonoBehaviourPunCallbacks
                     emoji1.SetActive(true);
                     _audioSource.clip = audio1;
                     _audioSource.Play();
-                    StartCoroutine(HideEmoji(6.2f));
+                    StartCoroutine(HideEmoji(3));
                     break;
                 case 2:
                     emoji2.SetActive(true);
                     _audioSource.clip = audio2;
                     _audioSource.Play();
-                    StartCoroutine(HideEmoji(32));
+                    StartCoroutine(HideEmoji(29));
                     break;
                 case 3:
                     emoji3.SetActive(true);
                     _audioSource.clip = audio3;
                     _audioSource.Play();
-                    StartCoroutine(HideEmoji(7));
+                    StartCoroutine(HideEmoji(3));
                     break;
                 case 4:
                     emoji4.SetActive(true);
                     _audioSource.clip = audio4;
                     _audioSource.Play();
-                    StartCoroutine(HideEmoji(6.5f));
+                    StartCoroutine(HideEmoji(3));
                     break;
             }
 
@@ -96,6 +96,7 @@ public class EmojiManager : MonoBehaviourPunCallbacks
     IEnumerator HideEmoji(float duration)
     {
         yield return new WaitForSeconds(duration);
+        _audioSource.Stop();
         emoji1.SetActive(false);
         emoji2.SetActive(false);
         emoji3.SetActive(false);
