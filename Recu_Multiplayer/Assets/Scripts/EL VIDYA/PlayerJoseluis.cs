@@ -23,6 +23,8 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     bool damaged;
     [SerializeField] GameObject spawner;
     public List<PlayerJoseluis> playersToHeal = new List<PlayerJoseluis>();
+    public EmojiManager emojiManager;
+    public AudioSource _audioSource;
 
     [Header("------------- JUMP -------------")]
     [Space(10)]

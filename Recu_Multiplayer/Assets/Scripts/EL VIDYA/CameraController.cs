@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] private PlayerJoseluis player;
+    bool audioPlayed;
     // Start is called before the first frame update
 
     private void Start()
@@ -16,13 +17,26 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<Rigidbody>().velocity.y > -70)
+        if (player == null)
         {
-            transform.position = player.transform.position;
+            Destroy(gameObject);
         }
         else
         {
-            transform.LookAt(player.transform.position);
+            if (player.GetComponent<Rigidbody>().velocity.y > -70)
+            {
+                transform.position = player.transform.position;
+                audioPlayed = false;
+            }
+            else
+            {
+                transform.LookAt(player.transform.position);
+                if (!audioPlayed)
+                {
+                    audioPlayed = true;
+                    player._audioSource.Play();
+                }
+            }
         }
     }
 }

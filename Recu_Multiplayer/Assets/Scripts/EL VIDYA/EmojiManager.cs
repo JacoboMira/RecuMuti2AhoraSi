@@ -19,6 +19,7 @@ public class EmojiManager : MonoBehaviourPunCallbacks
     private void Awake()
     {
         player = transform.parent.GetComponent<PlayerJoseluis>();
+        player.emojiManager = this;
         transform.parent = null;
     }
 
