@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &599268285590869329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5746323422322112431}
+  - component: {fileID: 1220468199171494285}
+  m_Layer: 0
+  m_Name: Tracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5746323422322112431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599268285590869329}
+  m_LocalRotation: {x: -0, y: -0.61656874, z: -0, w: 0.7873011}
+  m_LocalPosition: {x: -18.177357, y: 11.110579, z: 15.797943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5595947022987280021}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1220468199171494285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599268285590869329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edc5181e9d04ca549a4352b33e71cc56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5595947022084823844
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,7 +70,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5595947022084823844}
   m_LocalRotation: {x: 0.06286289, y: -0, z: -0, w: 0.9980222}
-  m_LocalPosition: {x: 0, y: 2.55, z: -7.01}
+  m_LocalPosition: {x: 0, y: 2.5499992, z: -7.010002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -269,6 +313,7 @@ Transform:
   - {fileID: 7624454609544165569}
   - {fileID: 2140558855523420991}
   - {fileID: 6053744732996152695}
+  - {fileID: 5746323422322112431}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 76.132, z: 0}
@@ -335,14 +380,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
+  torque: 20
   sensibility: 500
   fallDamageThreshold: 35
   fallDeathThreshold: 70
   cameraController: {fileID: 5595947022257680351}
+  pointer: {fileID: 599268285590869329}
+  playerMesh: {fileID: 0}
   spawner: {fileID: 0}
   playersToHeal: []
   emojiManager: {fileID: 0}
   _audioSource: {fileID: 3654638157790283947}
+  _animator: {fileID: 0}
   minJump: 20
   maxJump: 100
   chargeSpeed: 125

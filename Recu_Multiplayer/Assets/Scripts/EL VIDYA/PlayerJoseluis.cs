@@ -8,16 +8,20 @@ using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using Photon.Pun;
+using Quaternion = UnityEngine.Quaternion;
 
 public class PlayerJoseluis : MonoBehaviourPunCallbacks
 {
     Vector2 inputMov;
     float speedDecrease = 3;
     [SerializeField] float speed;
+    [SerializeField] float torque;
     [SerializeField] float sensibility;
     [SerializeField] float fallDamageThreshold;
     [SerializeField] float fallDeathThreshold;
     [SerializeField] GameObject cameraController;
+    [SerializeField] GameObject pointer;
+    [SerializeField] GameObject playerMesh;
     Rigidbody _rigidbody;
     float fallVelocity;
     bool damaged;
@@ -25,6 +29,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     public List<PlayerJoseluis> playersToHeal = new List<PlayerJoseluis>();
     public EmojiManager emojiManager;
     public AudioSource _audioSource;
+    public Animator _animator;
 
     [Header("------------- JUMP -------------")]
     [Space(10)]
@@ -46,13 +51,6 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     #endregion
 
 
-    private void Awake()
-    {
-        if (!photonView.IsMine)
-        {
-            Destroy(transform.GetChild(0).gameObject);
-        }
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +65,8 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         {
             Die();
         }
-        if (!damaged && photonView.IsMine)
+
+        if (!damaged && photonView.IsMine && inGround)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -89,6 +88,14 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
 
     }
 
+    void LookAtWalkDirection()
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(pointer.transform.position.x, pointer.transform.position.y, pointer.transform.position.z) - transform.position);
+        playerMesh.transform.rotation = Quaternion.Slerp(playerMesh.transform.rotation, targetRotation, torque * Time.deltaTime);
+        playerMesh.transform.eulerAngles = new Vector3(0, playerMesh.transform.eulerAngles.y, 0);
+    }
+
+
     void LookForward()
     {
         transform.eulerAngles = new Vector3(0, cameraController.transform.eulerAngles.y, 0);
@@ -104,6 +111,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     {
         if (Input.GetKeyDown(KeyCode.Space) && inGround || Input.GetKeyDown(KeyCode.Space) && inRope)
         {
+            photonView.RPC("AnimatorCommand", RpcTarget.All, "ChargingJump", true);
             isChargingJump = true;
         }
 
@@ -111,11 +119,18 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         {
             if (jumpForce > minJump)
             {
+                photonView.RPC("AnimatorCommand", RpcTarget.All, "Jumping", true);
+                photonView.RPC("AnimatorCommand", RpcTarget.All, "ChargingJump", false);
                 _rigidbody.AddForce((Vector3.up + transform.forward).normalized * jumpForce, ForceMode.Impulse);
                 inGround = false;
                 inRope = false;
                 actualRope = null;
                 photonView.RPC("Rope", RpcTarget.All, false);
+            }
+            else
+            {
+
+                photonView.RPC("AnimatorCommand", RpcTarget.All, "ChargingJump", false);
             }
 
             isChargingJump = false;
@@ -125,6 +140,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
 
         if (isChargingJump)
         {
+            LookForward();
             inputMov = Vector2.zero;
 
             jumpForce += chargeSpeed * Time.deltaTime;
@@ -138,9 +154,9 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     {
         if (!inRope)
         {
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.A) && inGround || Input.GetKey(KeyCode.D) && inGround)
             {
-                LookForward();
+                LookAtWalkDirection();
                 inputMov.x = Input.GetAxisRaw("Horizontal");
             }
             else if (inputMov.x != 0)
@@ -163,7 +179,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         }
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
-            LookForward();
+            LookAtWalkDirection();
             inputMov.y = Input.GetAxisRaw("Vertical");
         }
         else if (inputMov.y != 0)
@@ -183,8 +199,18 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
                 inputMov.y += speedDecrease * Time.deltaTime;
             }
         }
+        if(inputMov.y == 0 && inputMov.x == 0)
+        {
+            photonView.RPC("AnimatorCommand", RpcTarget.All, "Walking", false);
+        }
+        else
+        {
+            photonView.RPC("AnimatorCommand", RpcTarget.All, "Walking", true);
+        }
 
     }
+
+
 
     private void FixedUpdate()
     {
@@ -192,8 +218,10 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         {
             if (inGround && !damaged)
             {
-                _rigidbody.velocity = transform.right * speed * inputMov.x +
-                                      transform.forward * speed * inputMov.y +
+                Vector3 right = new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized;
+                Vector3 forward = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
+                _rigidbody.velocity = right * speed * inputMov.x +
+                                      forward * speed * inputMov.y +
                                       transform.up * _rigidbody.velocity.y;
 
             }
@@ -212,6 +240,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     {
         if (other.CompareTag("Floor"))
         {
+            photonView.RPC("AnimatorCommand", RpcTarget.All, "Jumping", false);
             inGround = true;
             _rigidbody.velocity = Vector3.zero;
             fallVelocity = -fallVelocity;
@@ -240,6 +269,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         if (other.CompareTag("Floor"))
         {
             inGround = false;
+            photonView.RPC( "AnimatorCommand",RpcTarget.All,"Jumping", true);
         }
         else if (other.CompareTag("Rope"))
         {
@@ -270,24 +300,34 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
 
         playersToHeal.Clear();
     }
+
     [PunRPC]
     public void Revive()
     {
         damaged = false;
-        
+        photonView.RPC("AnimatorCommand", RpcTarget.All, "Dead", false);
+
     }
 
     void Damage()
     {
         _rigidbody.velocity = Vector3.zero;
         damaged = true;
+        photonView.RPC("AnimatorCommand", RpcTarget.All, "Dead", true);
     }
 
 
     public void Die()
     {
+        _animator.SetBool("Falling", false);
         _rigidbody.velocity = Vector3.zero;
         transform.position = spawner.transform.position;
         photonView.RPC("Revive", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void AnimatorCommand(string animator, bool order)
+    {
+        _animator.SetBool(animator, order);
     }
 }

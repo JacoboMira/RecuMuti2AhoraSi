@@ -9,6 +9,13 @@ public class CameraController : MonoBehaviour
     bool audioPlayed;
     // Start is called before the first frame update
 
+    private void Awake()
+    {
+        if (!player.photonView.IsMine)
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
         transform.parent = null;
@@ -35,6 +42,7 @@ public class CameraController : MonoBehaviour
                 {
                     audioPlayed = true;
                     player._audioSource.Play();
+                    player._animator.SetBool("Falling", true);
                 }
             }
         }
