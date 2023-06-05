@@ -1409,7 +1409,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306874737}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5966244, y: 0.0099983215, z: -0.33999634}
+  m_LocalPosition: {x: 0.5966244, y: 0.79, z: -0.33999634}
   m_LocalScale: {x: 1.9104, y: 1.9104, z: 1.9104}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9632,9 +9632,13 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: 44cdac97c6e0825429ca54bff1fa384b, type: 2}
+    - target: {fileID: 1965507349180965601, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 44cdac97c6e0825429ca54bff1fa384b, type: 2}
     - target: {fileID: 1965507349180965602, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
       propertyPath: m_Size.z
-      value: 0.018297626
+      value: 0.018527964
       objectReference: {fileID: 0}
     - target: {fileID: 1965507349180965602, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
       propertyPath: m_Center.x
@@ -9642,12 +9646,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1965507349180965602, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
       propertyPath: m_Center.y
-      value: 0.0011301033
+      value: 0.0011301031
       objectReference: {fileID: 0}
     - target: {fileID: 1965507349180965602, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
       propertyPath: m_Center.z
-      value: -0.0008511661
+      value: -0.00073599664
       objectReference: {fileID: 0}
+    - target: {fileID: 1965507349180965605, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 44cdac97c6e0825429ca54bff1fa384b, type: 2}
     - target: {fileID: 2075134650260686311, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -9839,6 +9847,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1965507348561828077, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
     - {fileID: 1965507348561828074, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
+    - {fileID: 1965507349833813870, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d8d94cd725780b346a5bb8b77d0f14dc, type: 3}
 --- !u!1 &1965507349430756647 stripped
 GameObject:

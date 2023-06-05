@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7955566298005614476}
   m_Layer: 0
   m_Name: Piedra
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

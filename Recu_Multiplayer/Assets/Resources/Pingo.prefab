@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7871662183888729775, guid: c542ea9f8d49d344ab0feb7801248472, type: 3}
       propertyPath: ObservedComponents.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7871662183888729775, guid: c542ea9f8d49d344ab0feb7801248472, type: 3}
       propertyPath: ObservedComponents.Array.data[1]
@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de2a54d4ce7b4d546bba1d122a8a8d13, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7649994
+      value: -0.996
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de2a54d4ce7b4d546bba1d122a8a8d13, type: 3}
       propertyPath: m_LocalPosition.z
@@ -260,10 +260,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2993651928930387165, guid: de2a54d4ce7b4d546bba1d122a8a8d13, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8547247467274344ea3019a183463eed, type: 2}
+    - target: {fileID: -666985854777507172, guid: de2a54d4ce7b4d546bba1d122a8a8d13, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8547247467274344ea3019a183463eed, type: 2}
+    - target: {fileID: 359850054480558267, guid: de2a54d4ce7b4d546bba1d122a8a8d13, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8547247467274344ea3019a183463eed, type: 2}
     - target: {fileID: 919132149155446097, guid: de2a54d4ce7b4d546bba1d122a8a8d13, type: 3}
       propertyPath: m_Name
       value: Hit To The Legs
       objectReference: {fileID: 0}
+    - target: {fileID: 4627782859141153253, guid: de2a54d4ce7b4d546bba1d122a8a8d13, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8547247467274344ea3019a183463eed, type: 2}
+    - target: {fileID: 7942939474231463392, guid: de2a54d4ce7b4d546bba1d122a8a8d13, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8547247467274344ea3019a183463eed, type: 2}
+    - target: {fileID: 8417361359673230750, guid: de2a54d4ce7b4d546bba1d122a8a8d13, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8547247467274344ea3019a183463eed, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de2a54d4ce7b4d546bba1d122a8a8d13, type: 3}
 --- !u!4 &8188053498882782455 stripped
@@ -286,7 +310,7 @@ Animator:
   m_GameObject: {fileID: 8856926711095045709}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8809159ba1a7f52489faab361c371721, type: 2}
+  m_Controller: {fileID: 9100000, guid: 40322a2ea8ed84b48883be8b2ac8336c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

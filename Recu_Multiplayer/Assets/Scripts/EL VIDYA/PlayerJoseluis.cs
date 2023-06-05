@@ -29,6 +29,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     public List<PlayerJoseluis> playersToHeal = new List<PlayerJoseluis>();
     public EmojiManager emojiManager;
     public AudioSource _audioSource;
+    public AudioSource audioFortnite;
     public Animator _animator;
 
     [Header("------------- JUMP -------------")]
@@ -252,7 +253,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
                 }
                 else
                 {
-                    Damage();
+                    photonView.RPC("Damage", RpcTarget.All);
                 }
             }
         }
@@ -308,18 +309,21 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         photonView.RPC("AnimatorCommand", RpcTarget.All, "Dead", false);
 
     }
-
+    [PunRPC]
     void Damage()
     {
+        audioFortnite.Play();
         _rigidbody.velocity = Vector3.zero;
         damaged = true;
-        photonView.RPC("AnimatorCommand", RpcTarget.All, "Dead", true);
+        _animator.SetBool("Dead", true);
     }
 
 
     public void Die()
     {
         _animator.SetBool("Falling", false);
+        damaged = true;
+        photonView.RPC("AnimatorCommand", RpcTarget.All, "Dead", false);
         _rigidbody.velocity = Vector3.zero;
         transform.position = spawner.transform.position;
         photonView.RPC("Revive", RpcTarget.All);
