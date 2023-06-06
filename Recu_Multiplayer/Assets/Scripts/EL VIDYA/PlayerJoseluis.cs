@@ -78,7 +78,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
 
             ChargeJump();
         }
-        if (_rigidbody.velocity.y < 0)
+        if (_rigidbody.velocity.y < 0 && photonView.IsMine)
         {
             fallVelocity = _rigidbody.velocity.y;
         }
@@ -245,6 +245,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
             inGround = true;
             _rigidbody.velocity = Vector3.zero;
             fallVelocity = -fallVelocity;
+            Debug.Log(fallVelocity);
             if (fallVelocity > fallDamageThreshold)
             {
                 if (fallVelocity > fallDeathThreshold)
