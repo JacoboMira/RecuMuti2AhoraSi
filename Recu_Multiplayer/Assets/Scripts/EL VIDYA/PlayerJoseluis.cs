@@ -9,6 +9,7 @@ using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using Photon.Pun;
 using Quaternion = UnityEngine.Quaternion;
+using TMPro;
 
 public class PlayerJoseluis : MonoBehaviourPunCallbacks
 {
@@ -19,6 +20,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     [SerializeField] float sensibility;
     [SerializeField] float fallDamageThreshold;
     [SerializeField] float fallDeathThreshold;
+    [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] GameObject cameraController;
     [SerializeField] GameObject pointer;
     [SerializeField] GameObject playerMesh;
@@ -57,6 +59,10 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     {
         Cursor.lockState = CursorLockMode.Locked;
         _rigidbody = GetComponent<Rigidbody>();
+        if (!photonView.IsMine)
+        {
+            nameText.text = photonView.Owner.NickName;
+        }
     }
 
     // Update is called once per frame
