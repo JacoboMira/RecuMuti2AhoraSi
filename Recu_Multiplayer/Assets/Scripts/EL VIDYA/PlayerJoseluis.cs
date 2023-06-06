@@ -62,7 +62,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) && photonView.IsMine)
         {
             Die();
         }
@@ -305,6 +305,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     [PunRPC]
     public void Revive()
     {
+        
         damaged = false;
         _animator.SetBool("Dead", false);
 
