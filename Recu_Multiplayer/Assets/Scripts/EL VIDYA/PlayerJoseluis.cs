@@ -108,6 +108,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
 
     void LookForward()
     {
+        transform.eulerAngles = new Vector3(0, cameraController.transform.eulerAngles.y, 0);
         playerMesh.transform.eulerAngles = new Vector3(0, cameraController.transform.eulerAngles.y, 0);
     }
     void MoveCamera()
