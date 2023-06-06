@@ -67,7 +67,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
             Die();
         }
 
-        if (!damaged && photonView.IsMine && inGround)
+        if (!damaged && photonView.IsMine && inGround || !damaged && photonView.IsMine && inRope)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -112,7 +112,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     {
         if (Input.GetKeyDown(KeyCode.Space) && inGround || Input.GetKeyDown(KeyCode.Space) && inRope)
         {
-            photonView.RPC("AnimatorCommand", RpcTarget.All, "ChargingJump", true);
+            _animator.SetBool("ChargingJump", true);
             isChargingJump = true;
         }
 
@@ -120,8 +120,8 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         {
             if (jumpForce > minJump)
             {
-                photonView.RPC("AnimatorCommand", RpcTarget.All, "Jumping", true);
-                photonView.RPC("AnimatorCommand", RpcTarget.All, "ChargingJump", false);
+                _animator.SetBool("Jumping", true);
+                _animator.SetBool("ChargingJump", false);
                 _rigidbody.AddForce((Vector3.up + transform.forward).normalized * jumpForce, ForceMode.Impulse);
                 inGround = false;
                 inRope = false;
@@ -131,7 +131,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
             else
             {
 
-                photonView.RPC("AnimatorCommand", RpcTarget.All, "ChargingJump", false);
+                _animator.SetBool("ChargingJump", false);
             }
 
             isChargingJump = false;
@@ -202,11 +202,11 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         }
         if(inputMov.y == 0 && inputMov.x == 0)
         {
-            photonView.RPC("AnimatorCommand", RpcTarget.All, "Walking", false);
+            _animator.SetBool("Walking", false);
         }
         else
         {
-            photonView.RPC("AnimatorCommand", RpcTarget.All, "Walking", true);
+            _animator.SetBool("Walking", true);
         }
 
     }
@@ -227,7 +227,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
 
             }
         }
-        else
+        else if(!damaged)
         {
             transform.position = new Vector3(actualRope.transform.localPosition.x, transform.position.y, actualRope.transform.localPosition.z);
 
@@ -241,7 +241,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     {
         if (other.CompareTag("Floor"))
         {
-            photonView.RPC("AnimatorCommand", RpcTarget.All, "Jumping", false);
+            _animator.SetBool("Jumping", false);
             inGround = true;
             _rigidbody.velocity = Vector3.zero;
             fallVelocity = -fallVelocity;
@@ -270,7 +270,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
         if (other.CompareTag("Floor"))
         {
             inGround = false;
-            photonView.RPC( "AnimatorCommand",RpcTarget.All,"Jumping", true);
+            _animator.SetBool("Jumping", true);
         }
         else if (other.CompareTag("Rope"))
         {
@@ -306,7 +306,7 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     public void Revive()
     {
         damaged = false;
-        photonView.RPC("AnimatorCommand", RpcTarget.All, "Dead", false);
+        _animator.SetBool("Dead", false);
 
     }
     [PunRPC]
@@ -323,15 +323,10 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     {
         _animator.SetBool("Falling", false);
         damaged = true;
-        photonView.RPC("AnimatorCommand", RpcTarget.All, "Dead", false);
+        _animator.SetBool("Dead", false);
         _rigidbody.velocity = Vector3.zero;
         transform.position = spawner.transform.position;
         photonView.RPC("Revive", RpcTarget.All);
     }
 
-    [PunRPC]
-    void AnimatorCommand(string animator, bool order)
-    {
-        _animator.SetBool(animator, order);
-    }
 }
