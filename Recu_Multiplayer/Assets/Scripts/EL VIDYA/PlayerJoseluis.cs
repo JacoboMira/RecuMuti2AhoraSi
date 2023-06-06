@@ -97,9 +97,12 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
 
     void LookAtWalkDirection()
     {
-        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(pointer.transform.position.x, pointer.transform.position.y, pointer.transform.position.z) - transform.position);
-        playerMesh.transform.rotation = Quaternion.Slerp(playerMesh.transform.rotation, targetRotation, torque * Time.deltaTime);
-        playerMesh.transform.eulerAngles = new Vector3(0, playerMesh.transform.eulerAngles.y, 0);
+        if (!isChargingJump && inGround)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(pointer.transform.position.x, pointer.transform.position.y, pointer.transform.position.z) - transform.position);
+            playerMesh.transform.rotation = Quaternion.Slerp(playerMesh.transform.rotation, targetRotation, torque * Time.deltaTime);
+            playerMesh.transform.eulerAngles = new Vector3(0, playerMesh.transform.eulerAngles.y, 0);
+        }
     }
 
 
