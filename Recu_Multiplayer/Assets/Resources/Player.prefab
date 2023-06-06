@@ -520,6 +520,7 @@ MonoBehaviour:
   sensibility: 500
   fallDamageThreshold: 35
   fallDeathThreshold: 70
+  nameText: {fileID: 5450870347919640573}
   cameraController: {fileID: 5595947022257680351}
   pointer: {fileID: 599268285590869329}
   playerMesh: {fileID: 0}
