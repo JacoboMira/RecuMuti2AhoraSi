@@ -312,10 +312,13 @@ public class PlayerJoseluis : MonoBehaviourPunCallbacks
     [PunRPC]
     void Damage()
     {
-        audioFortnite.Play();
-        _rigidbody.velocity = Vector3.zero;
-        damaged = true;
-        _animator.SetBool("Dead", true);
+        if (photonView.IsMine)
+        {
+            audioFortnite.Play();
+            _rigidbody.velocity = Vector3.zero;
+            damaged = true;
+            _animator.SetBool("Dead", true);
+        }
     }
 
 
